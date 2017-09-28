@@ -1,0 +1,7 @@
+.idea/
+/*.csv
+*.iml
+src/main/resources/README
+src/main/webapp/VAADIN/themes/mytheme/addons.scss
+src/main/webapp/VAADIN/themes/mytheme/styles.css
+target/
