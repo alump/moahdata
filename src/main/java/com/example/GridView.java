@@ -2,13 +2,12 @@ package com.example;
 
 import com.example.data.DataGenerator;
 import com.example.data.DataObject;
+import com.vaadin.data.Binder;
+import com.vaadin.data.HasValue;
 import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Grid;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +33,25 @@ public class GridView extends VerticalLayout implements View {
         buttons.addComponents(menu, medium, large);
 
         grid = new Grid();
+        TextField nameEditor = new TextField();
+        TextField cityEditor = new TextField();
+        TextField phoneEditor = new TextField();
+
+        grid.getEditor().setEnabled(true);
         grid.setColumnReorderingAllowed(true);
         grid.setWidth(100, Unit.PERCENTAGE);
         grid.setHeightByRows(10);
+
         grid.addColumn(DataObject::getIndex).setCaption("Row").setHidable(true);
-        grid.addColumn(DataObject::getName).setCaption("Name").setHidable(true);
-        grid.addColumn(DataObject::getCity).setCaption("City").setHidable(true);
-        grid.addColumn(DataObject::getPhone).setCaption("Phone").setHidable(true);
+
+        grid.addColumn(DataObject::getName).setCaption("Name").setHidable(true)
+                .setEditorComponent(nameEditor, DataObject::setName);
+
+        grid.addColumn(DataObject::getCity).setCaption("City").setHidable(true)
+                .setEditorComponent(cityEditor, DataObject::setCity);
+
+        grid.addColumn(DataObject::getPhone).setCaption("Phone").setHidable(true)
+                .setEditorComponent(phoneEditor, DataObject::setPhone);
 
         addComponents(buttons, grid);
     }
